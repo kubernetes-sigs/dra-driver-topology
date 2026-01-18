@@ -45,9 +45,12 @@ lint-config: ## Verify golangci-lint linter configuration
 	$(GOLANGCI_LINT) config verify
 
 .PHONY: run
-run: fmt vet ## Run a controller from your host.
+run: ## Run a controller from your host.
 	go run ./cmd/main.go $(ARGS)
 
 .PHONY: test
-test: fmt vet ## Run tests.
+test: ## Run tests.
 	go test $$(go list ./... | grep -v /e2e) -coverprofile cover.out
+
+.PHONY: verify
+verify: fmt vet lint test ## Run all formatters and tests.

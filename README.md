@@ -15,6 +15,20 @@ For example:
 make run ARGS="--kube-server=https://127.0.0.1:46777 --v 5"
 ```
 
+## Updating tool dependencies
+
+Go tools in this repo are experimentally being managed using a separate module
+file for each tool and the `go tool` command (new as of Go 1.24) in such a way as to isolate
+the tool dependencies from each other's and the project's dependencies.
+
+To update the separate go.mod file properly, run go get with the -tool option
+and the correct -modfile target, for example:
+
+```
+# Update golangci-lint
+go get -tool -modfile=golangci-lint.mod github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest
+```
+
 ## Community, discussion, contribution, and support
 
 Learn how to engage with the Kubernetes community on the [community page](http://kubernetes.io/community/).
